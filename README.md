@@ -10,6 +10,7 @@ The server runs for delivering the messages between clients.
 
 ## Client program
 written in Java
+
 What clients can do:
   - Chatting (with other clients)
   - Othello game (with another client)
