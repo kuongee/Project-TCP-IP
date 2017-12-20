@@ -1,3 +1,8 @@
+/* Author: Jeesoo Min 
+Email: kuongee@gmail.com
+Completion date
+Version 1: 2014-01-11 ~ 2014-01-14
+Updated: 2017-12-21*/
 import java.awt.*;
 
 
@@ -7,7 +12,7 @@ public class OStone {
 	private int xofStone;
 	private int yofStone;
 	private Color color;
-	private int myStone = 0;	//1Àº Èò µ¹ -1Àº °ËÀº µ¹
+	private int myStone = 0;	//1ì€ í° ëŒ -1ì€ ê²€ì€ ëŒ
 	
 	private int numberofStone = 32;
 	
@@ -33,7 +38,7 @@ public class OStone {
 		return myStone;
 	}
 	
-////µ¹ÀÇ Å©±â¿Í x,yÁÂÇ¥¿Í »ö
+////ëŒì˜ í¬ê¸°ì™€ x,yì¢Œí‘œì™€ ìƒ‰
 	public void setXofStone(int x){
 		xofStone = x+10;
 	}
