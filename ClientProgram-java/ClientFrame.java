@@ -1,3 +1,8 @@
+/* Author: Jeesoo Min
+Email: kuongee@gmail.com
+Completion date
+Version 1: 2014-01-11 ~ 2014-01-14
+Updated: 2017-12-21*/
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -105,7 +110,7 @@ public class ClientFrame extends JFrame{
 		
 		try {
 			socket = new Socket(serverIp,7777);
-			ta.setText("Welcome! "+nickname+"\n»ó´ë¹æ°ú ¿¬°áµÇ¾ú½À´Ï´Ù.");
+			ta.setText("Welcome! "+nickname+"\nìƒëŒ€ë°©ê³¼ ì—°ê²°ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			out = new DataOutputStream(socket.getOutputStream());
 			in = new DataInputStream(socket.getInputStream());
 			try{
@@ -117,7 +122,7 @@ public class ClientFrame extends JFrame{
 					int n = nickname.length()+1;
 					ta.append("\r\n" + msg.substring(n));
 				}
-				/////°ÔÀÓ½ÃÀÛ ¹öÆ° ´©¸£¸é
+				/////ê²Œì„ì‹œì‘ ë²„íŠ¼ ëˆ„ë¥´ë©´
 				else if(msg.startsWith("start")){
 					
 					if(msg.substring(5).equals("B"+nickname)){
@@ -141,7 +146,7 @@ public class ClientFrame extends JFrame{
 				}
 				else if(msg.startsWith("full")){
 					if(msg.substring(4).equals(nickname))
-						ta.append("\r\n" + "°ÔÀÓ ÁøÇà Áß");
+						ta.append("\r\n" + "ê²Œì„ ì§„í–‰ ì¤‘");
 				}
 				
 				else if(msg.startsWith("[location]")){
@@ -157,7 +162,7 @@ public class ClientFrame extends JFrame{
 			}
 			
 		} catch (UnknownHostException e) {
-			ta.setText("»ó´ë¹æ°ú ¿¬°áÇÒ ¼ö ¾ø½À´Ï´Ù.");
+			ta.setText("ìƒëŒ€ë°©ê³¼ ì—°ê²°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
