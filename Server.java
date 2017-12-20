@@ -1,3 +1,10 @@
+/* 
+Author: Jeesoo Min 
+Email: kuongee@gmail.com
+Completion date
+Version 1: 2014-01-11 ~ 2014-01-14
+Updated: 2017-12-21
+*/
 import java.net.*;
 import java.io.*;
 import java.util.*;
@@ -41,10 +48,10 @@ public class Server{
 					String nn = msg.substring(7);
 					if(clientnum < 3){
 						if(clientnum == 1){
-							out.writeUTF("startB" + nn);	// °ËÀº µ¹
+							out.writeUTF("startB" + nn);	// Â°Ã‹Ã€Âº ÂµÂ¹
 						}
 						else if(clientnum == 2){
-							out.writeUTF("startW" + nn);	// Èò µ¹ 
+							out.writeUTF("startW" + nn);	// ÃˆÃ² ÂµÂ¹ 
 						}
 					}
 					else
