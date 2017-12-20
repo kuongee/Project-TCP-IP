@@ -1,4 +1,8 @@
-
+/* Author: Jeesoo Min
+Email: kuongee@gmail.com
+Completion date
+Version 1: 2014-01-11 ~ 2014-01-14
+Updated: 2017-12-21*/
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -18,10 +22,10 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 	public static ArrayList<OUnit> unitArray = new ArrayList <OUnit> ();
 	OUnit uA;
 	
-	public static int number = 1; // È¦¼ö °ËÀº µ¹, Â¦¼ö Èò µ¹
+	public static int number = 1; // í™€ìˆ˜ ê²€ì€ ëŒ, ì§ìˆ˜ í° ëŒ
 	
 	public static String okstr = "";				
-	public static int blackNum = 0, whiteNum = 0;	// Score panel¿¡¼­ º¸¿© ÁÙ Á¤º¸
+	public static int blackNum = 0, whiteNum = 0;	// Score panelì—ì„œ ë³´ì—¬ ì¤„ ì •ë³´
 	
 	boolean b_click = false, b_full = false, b_place = false;
 	static int i_click, j_click;
@@ -41,7 +45,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		
 		addMouseListener(this);
 		
-////////ÇÑ Ä­¾¿ °´Ã¼ »ı¼º
+////////í•œ ì¹¸ì”© ê°ì²´ ìƒì„±
 		for(int i=0; i<u.length; i++)
 			for(int j=0; j<u[i].length; j++)
 				u[i][j] = new OUnit(j*wh/8, i*wh/8, i, j);
@@ -61,15 +65,15 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		
 		Graphics2D g2D = (Graphics2D)g;
 		
-		lineDrawing(g2D);		// °ÔÀÓÆÇ ±×¸®±â
+		lineDrawing(g2D);		// ê²Œì„íŒ ê·¸ë¦¬ê¸°
 	
 		if(bb_click){
-			if(number % 2 == 1){		//È¦¼ö´Â °ËÀº µ¹
+			if(number % 2 == 1){		//í™€ìˆ˜ëŠ” ê²€ì€ ëŒ
 				drawStone(-1,i_click,j_click,g2D);
 				number++;
 				bb_click = false;
 			}
-			else{						//Â¦¼ö´Â Èòµ¹
+			else{						//ì§ìˆ˜ëŠ” í°ëŒ
 				drawStone(1,i_click,j_click,g2D);
 				number++;
 				bb_click = false;
@@ -77,7 +81,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		}
 		
 			if(!bb_click){
-			rePaint(g2D);	// °°Àº °÷À» ´­·¶À» ¶§ ´Ù½Ã ±×·ÁÁö°Ô ÇÔ
+			rePaint(g2D);	// ê°™ì€ ê³³ì„ ëˆŒë €ì„ ë•Œ ë‹¤ì‹œ ê·¸ë ¤ì§€ê²Œ í•¨
 			//noPlace();
 			bb_click = false;
 		}
@@ -85,12 +89,12 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 	}
 		
 	
-////°ÔÀÓÆÇ ¶óÀÎ ±×¸®±â
+////ê²Œì„íŒ ë¼ì¸ ê·¸ë¦¬ê¸°
 	public void lineDrawing(Graphics2D g){
 		int height = this.wh;
 		height = height / 8;
 		
-		// ¶óÀÎ ±×¸®±â
+		// ë¼ì¸ ê·¸ë¦¬ê¸°
 		for(int i=0; i<9; i++){
 			g.setStroke(new BasicStroke(5));
 			g.setColor(new Color(57,57,57));
@@ -174,7 +178,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		
 	}
 	
-////µ¹À» ±×¸²	
+////ëŒì„ ê·¸ë¦¼	
 	public void drawStone(int s, int i, int j, Graphics2D g){
 		u[i][j].setStone(s);		
 		g.setColor(u[i][j].unitStone.getColorofStone());
@@ -182,7 +186,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		u[i][j].setIsFull();
 	}
 	
-////°ÔÀÓ Ä­À» Å¬¸¯ÇÏ±â Àü¿¡ ºó °ø°£¿¡ ³õÀ» ÀÚ¸®¸¦ È®ÀÎ	
+////ê²Œì„ ì¹¸ì„ í´ë¦­í•˜ê¸° ì „ì— ë¹ˆ ê³µê°„ì— ë†“ì„ ìë¦¬ë¥¼ í™•ì¸	
 	public void isAvailable1(int i, int j){
 			
 		int ustone, clickstone;
@@ -207,28 +211,28 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 			}
 						
 			if(ustone == clickstone){
-				if(k == j-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+				if(k == j-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 					go = 0;
 					break;	
 				}
 				else{ 
 					ok = go + 1;
 					u[i][j].setIsOk();
-					break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+					break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 				}
 			}		
 				
 			else{
 				if(k == 0)
-					go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+					go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 				else
-					go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+					go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}		
 			
 		}	
 
 		
-		return;	// 1¹ø ¹æÇâ
+		return;	// 1ë²ˆ ë°©í–¥
 		
 	}
 	public void isAvailable2(int i, int j){
@@ -259,21 +263,21 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 					
 				if(ustone == clickstone){
-						if(m == i-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(m == i-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
 							u[i][j].setIsOk();
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(m == 0)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -289,21 +293,21 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(n == j-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(n == j-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
 							u[i][j].setIsOk();
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(n == 0)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -319,28 +323,28 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(m == i-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(m == i-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
 							u[i][j].setIsOk();
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(m == 0)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
 		
 		
 		
-		return;	// 2¹ø ¹æÇâ	
+		return;	// 2ë²ˆ ë°©í–¥	
 	}
 	public void isAvailable3(int i, int j){
 	
@@ -366,28 +370,28 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 			}
 				
 			if(ustone == clickstone){
-				if(k == i-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+				if(k == i-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 					go = 0;
 					break;	
 				}
 				else{ 
 					ok = go + 1;
 					u[i][j].setIsOk();
-					break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+					break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 				}
 			}		
 				
 			else{
 				if(k == 0)
-					go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+					go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 				else
-					go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+					go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 			}		
 		}
 			
 		
 		
-		return;	// 3¹ø ¹æÇâ
+		return;	// 3ë²ˆ ë°©í–¥
 		
 	}
 	public void isAvailable4(int i, int j){
@@ -417,28 +421,28 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 				
 				if(ustone == clickstone){
-					if(m == i-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(m == i-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
 						u[i][j].setIsOk();
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}
 				
 				else{
 					if(m == 0 || n == 7)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}	
 			}
 			
 		
 		
-		return;	// 4¹ø ¹æÇâ	
+		return;	// 4ë²ˆ ë°©í–¥	
 		
 	}
 	public void isAvailable5(int i, int j){
@@ -466,28 +470,28 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 					
 				if(ustone == clickstone){
-					if(k == j+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(k == j+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
 						u[i][j].setIsOk();
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}		
 				
 				else{
 					if(k == 7)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}		
 			
 		}	
 
 		
-		return;	// 5¹ø ¹æÇâ
+		return;	// 5ë²ˆ ë°©í–¥
 		
 	}
 	public void isAvailable6(int i, int j){
@@ -519,21 +523,21 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(m == i+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(m == i+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
 							u[i][j].setIsOk();
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(n == 7)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -548,21 +552,21 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(n == j+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(n == j+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
 							u[i][j].setIsOk();
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(m == 7)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -577,21 +581,21 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(m == i+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(m == i+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
 							u[i][j].setIsOk();
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(m == 7)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -599,7 +603,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		
 	
 		
-		return ;	// 6¹ø ¹æÇâ	
+		return ;	// 6ë²ˆ ë°©í–¥	
 		
 		
 	}
@@ -628,28 +632,28 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 				
 				if(ustone == clickstone){
-					if(k == i+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(k == i+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
 						u[i][j].setIsOk();
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}		
 				
 				else{
 					if(k == 7)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}		
 			}
 			
 
 		
-		return;	// 5¹ø ¹æÇâ
+		return;	// 5ë²ˆ ë°©í–¥
 		
 		
 	}
@@ -681,30 +685,30 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 				
 				if(ustone == clickstone){
-					if(m == i+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(m == i+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
 						u[i][j].setIsOk();
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}
 				
 				else{
 					if(m == 7 || n == 0)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}	
 			}
 		
 		
-		return;	// 8¹ø ¹æÇâ		
+		return;	// 8ë²ˆ ë°©í–¥		
 	}
 	
-////°ÔÀÓ Ä­À» Å¬¸¯ÇßÀ» ¶§ ±× °ø°£ÀÌ °¡´ÉÇÑÁö È®ÀÎ	
+////ê²Œì„ ì¹¸ì„ í´ë¦­í–ˆì„ ë•Œ ê·¸ ê³µê°„ì´ ê°€ëŠ¥í•œì§€ í™•ì¸	
 	public int isAvailable1(){
 		int i = i_click;
 		int j = j_click;
@@ -731,27 +735,27 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 			}
 						
 			if(ustone == clickstone){
-				if(k == j-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+				if(k == j-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 					go = 0;
 					break;	
 				}
 				else{ 
 					ok = go + 1;
-					break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+					break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 				}
 			}		
 				
 			else{
 				if(k == 0)
-					go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+					go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 				else
-					go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+					go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}		
 			
 		}	
 
 		
-		return go;	// 1¹ø ¹æÇâ
+		return go;	// 1ë²ˆ ë°©í–¥
 	}		
 	public int isAvailable2(){
 
@@ -787,20 +791,20 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(m == i-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(m == i-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(m == 0)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -816,20 +820,20 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(n == j-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(n == j-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(n == 0)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -845,27 +849,27 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(m == i-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(m == i-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(m == 0)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
 		
 		
 		
-		return go;	// 2¹ø ¹æÇâ	
+		return go;	// 2ë²ˆ ë°©í–¥	
 	}
 	public int isAvailable3(){
 		int i = i_click;
@@ -898,27 +902,27 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				//System.out.println("color"+ustone);
 				
 				if(ustone == clickstone){
-					if(k == i-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(k == i-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}		
 				
 				else{
 					if(k == 0)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}		
 			}
 			
 		
 		
-		return go;	// 3¹ø ¹æÇâ
+		return go;	// 3ë²ˆ ë°©í–¥
 		
 	}
 	public int isAvailable4(){
@@ -950,27 +954,27 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 				
 				if(ustone == clickstone){
-					if(m == i-1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(m == i-1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}
 				
 				else{
 					if(m == 0 || n == 7)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}	
 			}
 			
 		
 		
-		return go;	// 4¹ø ¹æÇâ	
+		return go;	// 4ë²ˆ ë°©í–¥	
 	
 	}
 	public int isAvailable5(){
@@ -1000,27 +1004,27 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 					
 				if(ustone == clickstone){
-					if(k == j+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(k == j+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}		
 				
 				else{
 					if(k == 7)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}		
 			
 		}	
 
 		
-		return go;	// 5¹ø ¹æÇâ
+		return go;	// 5ë²ˆ ë°©í–¥
 		
 	}
 	public int isAvailable6(){
@@ -1053,20 +1057,20 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(m == i+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(m == i+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(n == 7)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -1081,20 +1085,20 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(n == j+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(n == j+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(m == 7)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -1109,20 +1113,20 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 					}
 					
 					if(ustone == clickstone){
-						if(m == i+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+						if(m == i+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 							go = 0;
 							break;	
 						}
 						else{ 
 							ok = go + 1;
-							break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+							break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 						}
 					}
 					else{
 						if(m == 7)
-							go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+							go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 						else
-							go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+							go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 					}
 				}
 			}
@@ -1130,7 +1134,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		
 	
 		
-		return go;	// 6¹ø ¹æÇâ	
+		return go;	// 6ë²ˆ ë°©í–¥	
 		
 	}
 	public int isAvailable7(){
@@ -1160,27 +1164,27 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 				
 				if(ustone == clickstone){
-					if(k == i+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(k == i+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}		
 				
 				else{
 					if(k == 7)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}		
 			}
 			
 
 		
-		return go;	// 5¹ø ¹æÇâ
+		return go;	// 5ë²ˆ ë°©í–¥
 		
 	}
 	public int isAvailable8(){
@@ -1213,29 +1217,29 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 				}
 				
 				if(ustone == clickstone){
-					if(m == i+1){	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°À¸¸é ¹Ù·Î break;
+					if(m == i+1){	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ìœ¼ë©´ ë°”ë¡œ break;
 						go = 0;
 						break;	
 					}
 					else{ 
 						ok = go + 1;
-						break; 			// ´Ù¸¥ »ö ¿·¿¡ ÀÚ±â ÀÚ½Å°ú °°Àº »öÀÌ ÀÖ´Ù¸é ok¿¡ ÀúÀåÇÑ ÈÄ break;
+						break; 			// ë‹¤ë¥¸ ìƒ‰ ì˜†ì— ìê¸° ìì‹ ê³¼ ê°™ì€ ìƒ‰ì´ ìˆë‹¤ë©´ okì— ì €ì¥í•œ í›„ break;
 					}
 				}
 				
 				else{
 					if(m == 7 || n == 0)
-						go = 0;			// °ÔÀÓÆÇÀÇ ³¡±îÁö ÀÚ±â¿Í °°Àº »öÀÌ ³ª¿ÀÁö ¾Ê´Â´Ù¸é go ¹æÇâÀº 0
+						go = 0;			// ê²Œì„íŒì˜ ëê¹Œì§€ ìê¸°ì™€ ê°™ì€ ìƒ‰ì´ ë‚˜ì˜¤ì§€ ì•ŠëŠ”ë‹¤ë©´ go ë°©í–¥ì€ 0
 					else
-						go = go + 1;	// ¹Ù·Î ¿·¿¡ ÀÚ±â ÀÚ½Å°ú ´Ù¸£¸é continue ±×¸®°í go ¹æÇâÀº 1
+						go = go + 1;	// ë°”ë¡œ ì˜†ì— ìê¸° ìì‹ ê³¼ ë‹¤ë¥´ë©´ continue ê·¸ë¦¬ê³  go ë°©í–¥ì€ 1
 				}	
 			}
 		
 		
-		return go;	// 8¹ø ¹æÇâ	
+		return go;	// 8ë²ˆ ë°©í–¥	
 	}
 		
-////°ÔÀÓ Ä­À» Å¬¸¯ÇÑ ÈÄ »öÀÌ ¹Ù²î´Â °÷
+////ê²Œì„ ì¹¸ì„ í´ë¦­í•œ í›„ ìƒ‰ì´ ë°”ë€ŒëŠ” ê³³
 	public void colorChange1(int c){
 		int i = i_click;
 		int j = j_click;
@@ -1423,7 +1427,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 
 	
 	
-////°ÔÀÓÀÇ Ä­À» Å¬¸¯ ÇßÀ» ¶§
+////ê²Œì„ì˜ ì¹¸ì„ í´ë¦­ í–ˆì„ ë•Œ
 	public void mousePressed(MouseEvent e) {
 		if(number % 2 == cf.stoneColor){
 			try{
@@ -1436,7 +1440,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 	public void clientPressed(int x, int y){
 		int i=0, j=0;
 		
-/////////click µÈ Ä­ÀÇ index
+/////////click ëœ ì¹¸ì˜ index
 		for(i=0; i<u.length; i++)
 			for(j=0; j<u[i].length; j++){
 				b_click = u[i][j].isClicked(x, y);
@@ -1462,7 +1466,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		
 		else{		
 				
-			///////ºó °ø°£¿¡ µ¹À» ³õÀ» ¼ö ÀÖ´ÂÁö È®ÀÎÇÏ´Â ÀÛ¾÷
+			///////ë¹ˆ ê³µê°„ì— ëŒì„ ë†“ì„ ìˆ˜ ìˆëŠ”ì§€ í™•ì¸í•˜ëŠ” ì‘ì—…
 			a1 = isAvailable1();
 			a2 = isAvailable2();
 			a3 = isAvailable3();
@@ -1535,7 +1539,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		colorChange5(a5); colorChange6(a6); colorChange7(a7); colorChange8(a8);
 		
 		if(a1+a2+a3+a4+a5+a6+a7+a8 == 0){
-			okstr = "¡¿";
+			okstr = "Ã—";
 			sp.op.repaint();
 			return;
 		}
@@ -1561,7 +1565,7 @@ public class OGamePanel extends JPanel implements MouseListener, ActionListener 
 		sp.op.repaint();
 	}
 	
-////ÈùÆ® ¹öÆ°À» ´­·¶À» ¶§
+////íŒíŠ¸ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
 	public void actionPerformed(ActionEvent e) {
 		/*
 		String b = ((JButton)e.getSource()).getText();
