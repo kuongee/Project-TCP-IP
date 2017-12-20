@@ -1,3 +1,8 @@
+/* Author: Jeesoo Min
+Email: kuongee@gmail.com
+Completion date
+Version 1: 2014-01-11 ~ 2014-01-14
+Updated: 2017-12-21*/
 import java.awt.Toolkit;
 import java.awt.geom.*;
 
@@ -5,14 +10,14 @@ import java.awt.geom.*;
 public class OUnit {
 	
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
-	int pw = OGamePanel.wh;   //panelÀÇ ³Êºñ
+	int pw = OGamePanel.wh;   //panelì˜ ë„ˆë¹„
 	
 	private int xUnit, yUnit;
 	
 	private int widthUnit, heightUnit;
 	
 	OStone unitStone;
-	private Rectangle2D rectUnit;	// ÇÑ Ä­Àº Rectangle2D °´Ã¼¸¦ °¡Áö°í ÀÖ´Ù.(has-a relation)
+	private Rectangle2D rectUnit;	// í•œ ì¹¸ì€ Rectangle2D ê°ì²´ë¥¼ ê°€ì§€ê³  ìˆë‹¤.(has-a relation)
 	
 	private boolean b_full = false;
 	
@@ -21,18 +26,18 @@ public class OUnit {
 	private boolean b_isOk = false;
 	
 	public OUnit(int x, int y, int i, int j){
-		//°ÔÀÓÆÇ ÇÑ Ä­ÀÇ ¿ŞÂÊ À§ÀÇ ¸ğ¼­¸®ÀÇ ÁÂÇ¥
+		//ê²Œì„íŒ í•œ ì¹¸ì˜ ì™¼ìª½ ìœ„ì˜ ëª¨ì„œë¦¬ì˜ ì¢Œí‘œ
 		this.xUnit = x;	
 		this.yUnit = y; 
 		
-		//ÇÑ Ä­ÀÇ ³ôÀÌ¿Í ³Êºñ
+		//í•œ ì¹¸ì˜ ë†’ì´ì™€ ë„ˆë¹„
 		this.widthUnit = (int)(pw / 8); 
 		this.heightUnit = (int)(pw / 8); 
 		
 		this.i_index = i;
 		this.j_index = j;
 		
-		//Rectangle2D °´Ã¼ »ı¼º
+		//Rectangle2D ê°ì²´ ìƒì„±
 		this.rectUnit = new Rectangle2D.Double((double)this.xUnit, (double)this.yUnit, (double)this.widthUnit, (double)this.heightUnit);
 		
 		this.unitStone = new OStone();
@@ -54,7 +59,7 @@ public class OUnit {
 	
 	public int getStone() {	return unitStone.getMystone(); }
 	public void setStone(int s) {
-		unitStone.setMystone(s);	//stoneÀÌ ¹«½¼ »öÀÎÁö ¾Æ´Â °Å
+		unitStone.setMystone(s);	//stoneì´ ë¬´ìŠ¨ ìƒ‰ì¸ì§€ ì•„ëŠ” ê±°
 	}
 	
 	public void setRectUnit(int w, int h) {
@@ -72,7 +77,7 @@ public class OUnit {
 	
 	
 	public void setIsFull(){
-		b_full = true;        //µ¹ÀÌ ÀÌ¹Ì ÀÖ´Â °æ¿ì true return;
+		b_full = true;        //ëŒì´ ì´ë¯¸ ìˆëŠ” ê²½ìš° true return;
 	}
 	public boolean isFull(){
 		return b_full;
