@@ -1,3 +1,8 @@
+/* Author: Jeesoo Min 
+Email: kuongee@gmail.com
+Completion date
+Version 1: 2014-01-11 ~ 2014-01-14
+Updated: 2017-12-21*/
 import java.awt.*;
 
 import javax.swing.*;
@@ -37,7 +42,7 @@ public class OScorePanel extends JPanel {
 		g2D.drawLine(0,0,350,0);
 		g2D.drawLine(0,0,0,OGamePanel.wh+1);
 		g2D.drawLine(350,0,350,OGamePanel.wh+1);
-		g2D.drawLine(0,OGamePanel.wh+1,350,OGamePanel.wh+1);		//score panel�� �׵θ�
+		g2D.drawLine(0,OGamePanel.wh+1,350,OGamePanel.wh+1);		//score panelÀÇ Å×µÎ¸®
 	
 	}
 	
