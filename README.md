@@ -16,3 +16,5 @@ What clients can do:
   - Othello game (with another client)
   
 
+### Author
+Jeesoo Min (kuongee@gmail.com)
