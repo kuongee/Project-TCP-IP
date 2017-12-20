@@ -1,3 +1,8 @@
+/* Author: Jeesoo Min
+Email: kuongee@gmail.com
+Completion date
+Version 1: 2014-01-11 ~ 2014-01-14
+Updated: 2017-12-21*/
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
