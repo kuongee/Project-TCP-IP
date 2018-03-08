@@ -6,7 +6,6 @@ This is based on one of my program that I made when I was at university in Jan, 
 
 ## Server program
 The server runs for delivering the messages between clients.
-(Currently, only written in Java)
 
 ## Client program
 written in Java
