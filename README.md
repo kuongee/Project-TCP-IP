@@ -1,11 +1,11 @@
 # Project-TCP-IP
 This project is for practicing to write **server program in Go language**.
-(The program is now on refactoring stage.)
 
 This is based on one of my program that I made when I was at university in Jan, 2014.
 
 ## Server program
 The server runs for delivering the messages between clients.
+There are two versions, Java and Go lang.
 
 ## Client program
 written in Java
