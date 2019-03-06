@@ -5,6 +5,8 @@ This is based on one of my program that I made when I was at university in Jan, 
 
 I wrote some implementation issues in my Gitbook workspace. [Here](https://kuongee.gitbook.io/workspace/interests/gostudy/2018-03-08-goserver)
 
+<img src="pictureOfProgram.png" width="50%" height="50%">
+
 ## Server program
 The server runs for delivering the messages between clients.  
 There are Java and Go lang versions.
@@ -15,7 +17,6 @@ Written in Java
 What clients can do:
   - Chatting (with other clients)
   - Othello game (with another client)
-  
 
 ### Author
 Jeesoo Min (kuongee@gmail.com)
